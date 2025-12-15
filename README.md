@@ -8,7 +8,7 @@ You have exactly 12 seconds to build the tallest tower of presents possible. Gra
 ## Credits
 Made by:
 - @crevlm - Game Designer | Programmer
-- @[Name] -  Game Designer | Programmer
+- @VN-That1Guy -  Game Designer | Programmer
 - @[Name] -  3D Artist
 - @[Name] -  3D Artist
 - @[Name] -  Sound Designer
