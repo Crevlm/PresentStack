@@ -11,7 +11,7 @@ Made by:
 - @VN-That1Guy -  Game Designer | Programmer
 - @[Name] -  3D Artist
 - @[Name] -  3D Artist
-- @[Name] -  Sound Designer
+- @oblek1 -  Sound Designer
 
 ## Built With
 Unity
