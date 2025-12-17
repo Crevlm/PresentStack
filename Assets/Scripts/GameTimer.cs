@@ -1,21 +1,42 @@
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI heightText;
     public TextMeshProUGUI scoreText;
+    public Button startButton;
 
     private float timeLeft = 12f;
-    private bool gameRunning = true;
+    private bool gameRunning = false;
     private float highestPoint = 0f;
 
-   
+    private void Start()
+    {
+        if (startButton != null)
+        {
+            startButton.onClick.AddListener(StartTimer);
+        }
+    }
+
+
+    public void StartTimer()
+    {
+        gameRunning = true;
+        if (startButton != null)
+        {
+            startButton.gameObject.SetActive(false);
+        }
+    }
 
     void Update()
     {
+        if (!gameRunning) return;
+
+
         if (timeLeft <= 0)
         {
             gameRunning = false;
