@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{916533de-2bc7-4f5e-b056-2105afaa314a}">
+		<property name="assetPath">
+			<value>Objects, Packaging, Present, Gift, Wrapped, Pick Up SND19113.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.55073958333333328</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{67cfe0ac-8635-427e-a490-ef203c6bbb30}</destination>
+		</relationship>
+	</object>
+</objects>
