@@ -1,6 +1,7 @@
 // PickupController.cs
 using UnityEngine;
-
+using FMODUnity;
+using FMOD.Studio;
 public class PickupController : MonoBehaviour
 {
     private Rigidbody heldObject; // stores the present we're currently holding
@@ -12,6 +13,8 @@ public class PickupController : MonoBehaviour
     private float drag; // store the value of maxDistFromCursor multiplied by the heldObject's weight
     private float moveEval; // store the return value of the smoothCurve's evaluation value for the third parameter in Vector3.Lerp()
     private Vector3 nextPosition; // store the calculation of the objects next position after evaluating the Lerp
+    [Header("FMOD Events")]
+    [SerializeField] private EventReference pickupEvent;
 
     void Update()
     {
@@ -57,6 +60,11 @@ public class PickupController : MonoBehaviour
                     if (obj == null)
                     {
                         Debug.Log("Weight component not found, \nthis probably is grabbing a child object or this object has no weight component.");
+                    }
+                    // Play FMOD pickup sound
+                    if (pickupEvent.IsNull == false)
+                    {
+                        RuntimeManager.PlayOneShot(pickupEvent, heldObject.transform.position);
                     }
                 }
             }

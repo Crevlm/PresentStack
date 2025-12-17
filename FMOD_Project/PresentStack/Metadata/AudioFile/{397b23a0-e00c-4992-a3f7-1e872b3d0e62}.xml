@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{397b23a0-e00c-4992-a3f7-1e872b3d0e62}">
+		<property name="assetPath">
+			<value>Objects, Packaging, Present, Gift, Wrapped Box, Fall Over SND19106 11.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.42330208333333336</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{67cfe0ac-8635-427e-a490-ef203c6bbb30}</destination>
+		</relationship>
+	</object>
+</objects>
