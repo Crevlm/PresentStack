@@ -94,6 +94,7 @@
 			<destination>{53f48404-99e5-44c8-bce2-03cdfed9a137}</destination>
 			<destination>{837a1804-9b2a-412d-8c2d-7920e31a35b7}</destination>
 			<destination>{49b721e1-2462-4687-92d7-b68f7ba92daf}</destination>
+			<destination>{8b1f02d1-eeb2-420e-a108-c86b8fec5f7d}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{db0bd350-0e66-4d61-a24d-c5f8a7a753c2}">
@@ -149,6 +150,11 @@
 			<destination>{5a7a6853-205d-4da2-aa0b-84dfd514e62a}</destination>
 		</relationship>
 	</object>
+	<object class="SingleSound" id="{8b1f02d1-eeb2-420e-a108-c86b8fec5f7d}">
+		<relationship name="audioFile">
+			<destination>{696eb3ae-5713-435b-a40a-f301d6ed799d}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{998d3df4-0a4a-47f7-8e6d-54cf12689234}">
 		<relationship name="effects">
 			<destination>{e7cea2c9-ad5d-4bb8-af4e-e9523d497b38}</destination>
@@ -166,7 +172,7 @@
 	</object>
 	<object class="AutomationPoint" id="{4f9d8ba3-3886-4544-b99f-961a02b0ef71}">
 		<property name="position">
-			<value>0.21875</value>
+			<value>0.28125</value>
 		</property>
 		<property name="value">
 			<value>1</value>

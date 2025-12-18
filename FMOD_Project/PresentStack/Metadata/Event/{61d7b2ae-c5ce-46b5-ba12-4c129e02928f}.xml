@@ -139,11 +139,17 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{88242baf-5a3c-4b00-9ea5-1accbd179cfe}">
+		<property name="startOffset">
+			<value>16.5</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{696eb3ae-5713-435b-a40a-f301d6ed799d}</destination>
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{e1d01eba-0f91-449b-9353-75d31018b043}">
+		<property name="startOffset">
+			<value>36</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{d01123ce-89ce-42fa-a94a-44b41e1ce8f6}</destination>
 		</relationship>

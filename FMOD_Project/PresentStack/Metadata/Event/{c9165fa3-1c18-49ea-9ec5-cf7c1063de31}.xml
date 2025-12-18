@@ -59,7 +59,14 @@
 			<destination>{72feb2aa-f54a-4dfd-a1d0-11f6a3e05d9c}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{9cae95a0-c523-42a0-ac29-0be3ef6c2bf1}" />
+	<object class="EventAutomatableProperties" id="{9cae95a0-c523-42a0-ac29-0be3ef6c2bf1}">
+		<property name="minimumDistance">
+			<value>2.79999995</value>
+		</property>
+		<property name="maximumDistance">
+			<value>10</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{fefe5291-93aa-4bcf-81d0-3762eebd0942}" />
 	<object class="GroupTrack" id="{282a1d4a-3c83-4c81-a510-bdf10fa49117}">
 		<relationship name="automationTracks">
@@ -233,7 +240,17 @@
 	</object>
 	<object class="MixerBusPanner" id="{916bf3ae-ab21-413a-868a-586c80c58ff1}" />
 	<object class="MixerBusFader" id="{dad25845-cad4-4820-b5ef-820d00586790}" />
-	<object class="SpatialiserEffect" id="{cf1e2b6a-4461-4368-be4a-32e92c8541b2}" />
+	<object class="SpatialiserEffect" id="{cf1e2b6a-4461-4368-be4a-32e92c8541b2}">
+		<property name="distanceRolloffType">
+			<value>4</value>
+		</property>
+		<property name="minimumDistance">
+			<value>2.79999995</value>
+		</property>
+		<property name="maximumDistance">
+			<value>10</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{dc57fe81-463e-4d0b-99ec-5cfcd3ea793a}">
 		<property name="position">
 			<value>3.2000000000000002</value>
@@ -317,6 +334,7 @@
 		<relationship name="automationPoints">
 			<destination>{e300507e-ff38-4ce3-a608-e60e8c03b1c4}</destination>
 			<destination>{d8309056-5e6f-4d6e-bbd1-8e8c981e32ca}</destination>
+			<destination>{4a7e5a9f-710a-4ff1-873e-d4b5a277bdba}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{c9b27bf7-c6e3-4844-94df-7ad821d25b9c}" />
@@ -325,7 +343,7 @@
 			<value>0.10673234811165846</value>
 		</property>
 		<property name="value">
-			<value>-11</value>
+			<value>-10.5</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{d8309056-5e6f-4d6e-bbd1-8e8c981e32ca}">
@@ -333,7 +351,15 @@
 			<value>9.9671592775041056</value>
 		</property>
 		<property name="value">
-			<value>2</value>
+			<value>-3</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{4a7e5a9f-710a-4ff1-873e-d4b5a277bdba}">
+		<property name="position">
+			<value>7.7257799671592782</value>
+		</property>
+		<property name="value">
+			<value>-4</value>
 		</property>
 	</object>
 </objects>

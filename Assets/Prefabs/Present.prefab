@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8184328878585289172}
   - component: {fileID: 2567502688569713823}
   - component: {fileID: 6702245038639192367}
-  m_Layer: 0
+  - component: {fileID: 6833376242517760042}
+  m_Layer: 6
   m_Name: Present
   m_TagString: Present
   m_Icon: {fileID: 0}
@@ -139,4 +140,33 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
+--- !u!114 &6833376242517760042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285571693132112470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029cf820ee6f9e64db88249d7e060a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PresentImpactAudio
+  impactEvent:
+    Guid:
+      Data1: -921280605
+      Data2: 1240079384
+      Data3: 2093991326
+      Data4: 836657936
+    Path: event:/SFX/PresentImpact
+  intensityParameter: Intensity
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  minFallTime: 0.1
+  maxFallTime: 2
+  minIntensity: 0
+  maxIntensity: 10
+  minImpactVelocity: 0.42
+  settleCooldown: 0.06

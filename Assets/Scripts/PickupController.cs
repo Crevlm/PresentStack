@@ -113,6 +113,13 @@ public class PickupController : MonoBehaviour
             heldObject.useGravity = true; // adds gravity back in when we drop the item so it falls
             heldObject.constraints = RigidbodyConstraints.None; // unfreeze the rotation so it can fall and tumble when it lands
 
+            PresentImpactAudio impactAudio =
+            heldObject.GetComponent<PresentImpactAudio>(); 
+            if (impactAudio != null)
+            {
+                impactAudio.NotifyDropped(); // notify the present that it has been dropped so it can reset its fall timing
+            }
+
             // Add a small random spin for natural tumbling
             Vector3 randomTorque = new Vector3(
                 Random.Range(-2f, 2f),
