@@ -8,11 +8,15 @@ public class PickupController : MonoBehaviour
     private float holdDistance; // stores how far away from the camera the object should be held.
 
     [SerializeField] private AnimationCurve smoothCurve; // used for making Lerps feel less linear
-    private float maxDistFromCursor = 10f; // max distance that the held object can fall behind the cursor when moving around while picked up
+    [Tooltip("How far or close should the object catch up to the cursor (More = farther, Less = closer)")]
+    [SerializeField] private float maxDistFromCursor = 10f;  // max distance that the held object can fall behind the cursor when moving around while picked up
+                                            // this also controls how strong or weak the objects should be pulled to the cursor 
+    
     private float distBetweenOldAndNewPos; // store the distance between the current position and the new position
     private float drag; // store the value of maxDistFromCursor multiplied by the heldObject's weight
     private float moveEval; // store the return value of the smoothCurve's evaluation value for the third parameter in Vector3.Lerp()
     private Vector3 nextPosition; // store the calculation of the objects next position after evaluating the Lerp
+    
     [Header("FMOD Events")]
     [SerializeField] private EventReference pickupEvent;
 
@@ -49,6 +53,7 @@ public class PickupController : MonoBehaviour
                 {
                     heldObject = rb; //stores this as our held object
                     heldObject.useGravity = false; // turn off gravity while the object is in our hand
+                    heldObject.isKinematic = true;
                     heldObject.angularVelocity = Vector3.zero; // stop any sort of weird present spinning
                     heldObject.constraints = RigidbodyConstraints.FreezeRotation; // Freezes rotation to stop spinning
                     nextPosition = heldObject.gameObject.transform.position; // store the object's initial position
@@ -77,9 +82,10 @@ public class PickupController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Create a ray from the camera through the current mouse position
 
         //Check to see if the mouse scroll wheel moved. 
+        //Hold Shift to make the push/pull more precise
         //Scroll down (negative) makes the holdDistance bigger which pushes the object away from the camera
         //Scroll up (positive) makes the holdDistance smaller which pulls the object closer to the camera
-        holdDistance -= Input.mouseScrollDelta.y * 2f;
+        holdDistance -= Input.GetKey(KeyCode.LeftShift) ? Input.mouseScrollDelta.y : Input.mouseScrollDelta.y * 2f;
         holdDistance = Mathf.Clamp(holdDistance, 8f, 26f); // keeps the hold distance between 8 and 26 units and prevents the object from getting too close or too far away
         
 
@@ -109,6 +115,7 @@ public class PickupController : MonoBehaviour
     {
         if (heldObject != null) // makes sure that we're still holding the object
         {
+            heldObject.isKinematic = false;
             heldObject.linearVelocity = Vector3.zero; // stop any sort of momentum building when this object was grabbed whilst falling
             heldObject.useGravity = true; // adds gravity back in when we drop the item so it falls
             heldObject.constraints = RigidbodyConstraints.None; // unfreeze the rotation so it can fall and tumble when it lands
