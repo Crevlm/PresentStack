@@ -12,7 +12,7 @@ public class PresentSpawner : MonoBehaviour
 
     [Header("Spawn Settings")]
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private Vector3 spawnAreaSize = new Vector3(6f, 6f, 6f); //size of the area where the presents will spawn in.
+    //[SerializeField] private Vector3 spawnAreaSize = new Vector3(6f, 6f, 6f); //size of the area where the presents will spawn in.
     [SerializeField] private int numberOfPresents = 10;
 
     private GameObject[] presents;
