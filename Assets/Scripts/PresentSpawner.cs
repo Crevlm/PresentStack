@@ -16,11 +16,13 @@ public class PresentSpawner : MonoBehaviour
     [SerializeField] private int numberOfPresents = 10;
 
     private GameObject[] presents;
+    private Bounds bounds;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        bounds = GetComponent<Collider>().bounds;
         StartCoroutine(SpawnAllPresents());
     }
 
@@ -40,7 +42,8 @@ public class PresentSpawner : MonoBehaviour
         //Random position within the spawn area
         Vector3 randomOffset = Utilities.GetRandomPointInBounds(spawnPoint.gameObject.GetComponent<Collider>().bounds);
 
-        Vector3 spawnPosition = spawnPoint.position + randomOffset; // finds a random vector3 from the above in the spawn area to spawn the present
+        // bounds.center is relative to the world positiion
+        Vector3 spawnPosition = bounds.center + randomOffset; // finds a random vector3 from the above in the spawn area to spawn the present
         
         //Randomize the size of the present
         float randomScaleX = UnityEngine.Random.Range(minSize.x, maxSize.x);
@@ -48,7 +51,8 @@ public class PresentSpawner : MonoBehaviour
         float randomScaleZ = UnityEngine.Random.Range(minSize.z, maxSize.z);
         Vector3 randomScale = new Vector3(randomScaleX, randomScaleY, randomScaleZ);
 
-        StartCoroutine(SpawnCheck(spawnPosition, Utilities.Vec3Average(randomScale))); // NOTE: This is a local coroutine
+        if (presentNumber != 0)
+            StartCoroutine(SpawnCheck(spawnPosition, Utilities.Vec3Average(randomScale))); // NOTE: This is a local coroutine
 
         //Spawn the present
         GameObject present = Instantiate(presentPrefab, spawnPosition, Quaternion.identity);
@@ -95,12 +99,13 @@ public class PresentSpawner : MonoBehaviour
                 {
                     if (presents[spawnedPresents] == null) break; // No more presents beyond this point of the array
                 }
+
                 bool[] conflict = new bool[spawnedPresents];
                 Predicate<bool> hasConflicts = n => n == false; // local property used for an Array check in the While loop, making sure that all boolean values are false
                                                                 // Note: this property uses the System namespace, which conflicts with certain UnityEngine methods
 
                 int iteration = 0; // Failsafe: All the presents were too big for any more to spawn next to each other, check if this has been running for too long.
-                while (!goodToGo || iteration < spawnedPresents * 30)
+                while (!goodToGo || iteration < 256)
                 {
                     // Check for all presents currently in the scene
                     for (int i = 0; i < spawnedPresents; i++)
@@ -111,23 +116,30 @@ public class PresentSpawner : MonoBehaviour
                         if (dist < size + scale) // Is this object spawning near/inside the closest object?
                         {
                             //If the next object is spawning inside the last object that was spawning, 
-                            while (dist < Utilities.Vec3Average(presents[i].transform.localScale))
+                            while (dist < size)
                             {
                                 spawnPos = Utilities.GetRandomPointInBounds(spawnPoint.gameObject.GetComponent<Collider>().bounds);
+                                // Recalculate the dist after setting a new spawnPos
+                                dist = Mathf.Abs((presents[i].transform.position - spawnPos).sqrMagnitude);
+
+                                yield return new WaitForFixedUpdate();
                             }
                             conflict[i] = true;
                         }
                         else
                             conflict[i] = false;
                     }
+
                     // If there are no conflicts whatsoever or that the iteration has gone for too long, exit this while loop
                     if (Array.TrueForAll<bool>(conflict, hasConflicts))
                         goodToGo = true;
                     iteration++;
-                    yield return new WaitForSeconds(0.002f);
+
+                    yield return new WaitForSeconds(0.01f);
                 }
             }
-            yield return spawnPosition = spawnPos;
+
+            yield return spawnPosition = bounds.center + spawnPos;
         }
     }
 

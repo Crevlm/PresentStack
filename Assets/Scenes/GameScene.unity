@@ -2363,7 +2363,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8, y: 1, z: 4}
+  m_Size: {x: 8, y: 0.1, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1397755490
 MonoBehaviour:
@@ -2386,7 +2386,6 @@ MonoBehaviour:
   minSize: {x: 2, y: 2.5, z: 2}
   maxSize: {x: 4.5, y: 4, z: 4}
   spawnPoint: {fileID: 1397755491}
-  spawnAreaSize: {x: 8, y: 6, z: 5}
   numberOfPresents: 10
 --- !u!4 &1397755491
 Transform:
@@ -2397,7 +2396,7 @@ Transform:
   m_GameObject: {fileID: 1397755488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 2, z: -11.14}
+  m_LocalPosition: {x: -0.5, y: 1, z: -11.14}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []

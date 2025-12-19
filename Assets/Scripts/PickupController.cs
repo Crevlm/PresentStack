@@ -53,9 +53,9 @@ public class PickupController : MonoBehaviour
                 {
                     heldObject = rb; //stores this as our held object
                     heldObject.useGravity = false; // turn off gravity while the object is in our hand
-                    heldObject.isKinematic = true;
                     heldObject.angularVelocity = Vector3.zero; // stop any sort of weird present spinning
                     heldObject.constraints = RigidbodyConstraints.FreezeRotation; // Freezes rotation to stop spinning
+                    heldObject.isKinematic = true;
                     nextPosition = heldObject.gameObject.transform.position; // store the object's initial position
                     holdDistance = Vector3.Distance(Camera.main.transform.position, hit.point); // remember how far away from the camera we grabbed it, keeping the same distance when we move the mouse
 
@@ -85,7 +85,7 @@ public class PickupController : MonoBehaviour
         //Hold Shift to make the push/pull more precise
         //Scroll down (negative) makes the holdDistance bigger which pushes the object away from the camera
         //Scroll up (positive) makes the holdDistance smaller which pulls the object closer to the camera
-        holdDistance -= Input.GetKey(KeyCode.LeftShift) ? Input.mouseScrollDelta.y : Input.mouseScrollDelta.y * 2f;
+        holdDistance -= Input.GetKey(KeyCode.LeftShift) ? Input.mouseScrollDelta.y * 0.25f : Input.mouseScrollDelta.y * 2f;
         holdDistance = Mathf.Clamp(holdDistance, 8f, 26f); // keeps the hold distance between 8 and 26 units and prevents the object from getting too close or too far away
         
 
