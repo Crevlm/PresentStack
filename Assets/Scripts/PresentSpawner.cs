@@ -7,8 +7,8 @@ public class PresentSpawner : MonoBehaviour
     [Header("Present Settings")]
     [SerializeField] private GameObject presentPrefab;
     [SerializeField] private Material[] wrappingPapers; //drag the different 
-    [SerializeField] private Vector3 minSize = new Vector3(3f, 3f, 3f);
-    [SerializeField] private Vector3 maxSize = new Vector3(5.5f, 5f, 5.5f);
+    [SerializeField] private Vector3 minSize = new Vector3(.2f, .25f, .2f);
+    [SerializeField] private Vector3 maxSize = new Vector3(.5f, .5f, .5f);
 
     [Header("Spawn Settings")]
     [SerializeField] private Transform spawnPoint;
@@ -69,10 +69,13 @@ public class PresentSpawner : MonoBehaviour
         }
 
         //Select a random Wrapping Paper to put on the present
+        //Select a random Wrapping Paper to put on the present
         if (wrappingPapers.Length > 0)
         {
             Material randomMaterial = wrappingPapers[UnityEngine.Random.Range(0, wrappingPapers.Length)];
+            //Debug.Log($"Selected material: {randomMaterial.name}");
             present.GetComponent<MeshRenderer>().material = randomMaterial;
+            //Debug.Log($"Material applied: {present.GetComponent<MeshRenderer>().material.name}");
         }
 
         /// <summary>

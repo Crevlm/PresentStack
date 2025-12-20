@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2530012842215451756}
   - component: {fileID: 6833376242517760042}
   m_Layer: 6
-  m_Name: Present
+  m_Name: PlaceholderPresent
   m_TagString: Present
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
