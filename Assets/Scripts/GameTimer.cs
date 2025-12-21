@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
@@ -18,41 +17,53 @@ public class GameTimer : MonoBehaviour
     {
         if (startButton != null)
         {
-            startButton.onClick.AddListener(StartTimer);
+            startButton.onClick.AddListener(OnStartButtonClicked);
         }
     }
 
-
-    public void StartTimer()
+    void OnStartButtonClicked()
     {
-        gameRunning = true;
+        // Tell GameManager to start countdown
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnStartButtonPressed();
+        }
+
+        // Hide start button
         if (startButton != null)
         {
             startButton.gameObject.SetActive(false);
         }
     }
 
+    public void StartTimer()
+    {
+        gameRunning = true;
+    }
+
     void Update()
     {
         if (!gameRunning) return;
-
 
         if (timeLeft <= 0)
         {
             gameRunning = false;
             timerText.text = "0.0s";
-            ShowFinalScore();
+
+            int finalScore = Mathf.RoundToInt(highestPoint * 100);
+
+            // Tell GameManager game is over
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.EndGame(finalScore);
+            }
+
             return;
         }
 
         timeLeft -= Time.deltaTime;
         timerText.text = $"{timeLeft:F1}s";
-
-        if (gameRunning)
-        {
-            UpdateHeight();
-        }
-
+        UpdateHeight();
     }
 
     void UpdateHeight()
@@ -68,14 +79,7 @@ public class GameTimer : MonoBehaviour
             }
         }
 
-        highestPoint = Mathf.Max(highestPoint, maxHeight);
+        highestPoint = maxHeight; // Just take current height, not the max over time
         heightText.text = $"Height: {highestPoint:F1}m";
     }
-
-    void ShowFinalScore()
-    {
-        int finalScore = Mathf.RoundToInt(highestPoint * 100);
-        scoreText.text = $"Score: {finalScore}";
-    }
-
 }
