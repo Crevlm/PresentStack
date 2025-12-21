@@ -174,11 +174,11 @@ MonoBehaviour:
       Data3: 2093991326
       Data4: 836657936
     Path: event:/SFX/PresentImpact
-  intensityParameter: ImpactIntensity
+  intensityParameter: Intensity
   groundLayers:
     serializedVersion: 2
     m_Bits: 65
   minFallTime: 0.1
   maxFallTime: 2.5
   minIntensity: 0
-  maxIntensity: 1
+  maxIntensity: 10
