@@ -2230,6 +2230,27 @@ MonoBehaviour:
   restartButton: {fileID: 587091400}
   pickupController: {fileID: 929897053}
   gameTimer: {fileID: 929897052}
+  confirmEvent:
+    Guid:
+      Data1: -2026115755
+      Data2: 1214276427
+      Data3: 1383852188
+      Data4: -696409119
+    Path: event:/SFX/UI_Confirm
+  countdownTickEvent:
+    Guid:
+      Data1: -3682469
+      Data2: 1242725615
+      Data3: 495057318
+      Data4: 1479883894
+    Path: event:/SFX/UI_Select
+  countdownGoEvent:
+    Guid:
+      Data1: -1782827647
+      Data2: 1107657855
+      Data3: 376280511
+      Data4: 1140322612
+    Path: event:/SFX/UI_Start
 --- !u!1 &933867127
 GameObject:
   m_ObjectHideFlags: 0

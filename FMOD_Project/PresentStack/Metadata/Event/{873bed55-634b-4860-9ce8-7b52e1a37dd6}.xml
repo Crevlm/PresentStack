@@ -5,7 +5,7 @@
 			<value>UI_Confirm</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{3e6fd1a7-33dc-49f0-a711-3f3bfa69cd15}</destination>
@@ -109,7 +109,7 @@
 			<value>0.0390625</value>
 		</property>
 		<property name="volume">
-			<value>-10.5</value>
+			<value>-12</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{2370bc17-9c84-4f06-9827-e48a46048c4f}</destination>
@@ -135,7 +135,6 @@
 	<object class="MixerBusEffectChain" id="{73af3f70-0e59-4c63-9977-daff5e56c003}">
 		<relationship name="effects">
 			<destination>{63d4087a-65b4-4956-84a6-c84f0c8aa770}</destination>
-			<destination>{0a145934-5538-4020-a5b1-73a42b5114f7}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{32983383-057e-4dae-ae70-ddbce04a1647}" />
@@ -156,7 +155,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{62b1685a-d0ca-4952-9fd3-f8cbea97d96b}" />
 	<object class="MixerBusFader" id="{63d4087a-65b4-4956-84a6-c84f0c8aa770}" />
-	<object class="SpatialiserEffect" id="{0a145934-5538-4020-a5b1-73a42b5114f7}" />
 	<object class="MixerBusFader" id="{1bfce000-ca29-456f-b952-57b2d83ab517}" />
 	<object class="SFXReverbEffect" id="{473573e9-3718-4b77-9179-7c5119223ac2}">
 		<property name="wetLevel">

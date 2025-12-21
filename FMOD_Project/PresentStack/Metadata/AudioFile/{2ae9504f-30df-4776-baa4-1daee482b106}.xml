@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{2ae9504f-30df-4776-baa4-1daee482b106}">
+		<property name="assetPath">
+			<value>Games, Video, Racing, GUI, Race Countdown, From 3, Race Start SND67827.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.56998958333333338</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{67cfe0ac-8635-427e-a490-ef203c6bbb30}</destination>
+		</relationship>
+	</object>
+</objects>

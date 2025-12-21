@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+using FMOD.Studio;
+using FMODUnity;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -21,6 +22,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PickupController pickupController;
     [SerializeField] private GameTimer gameTimer;
 
+    [Header("FMOD")] //set FMOD event and parameter names in inspector
+    [SerializeField] private EventReference confirmEvent;
+    [SerializeField] private EventReference countdownTickEvent;
+    [SerializeField] private EventReference countdownGoEvent;
     public enum GameState
     {
         WaitingToStart,
@@ -66,6 +71,7 @@ public class GameManager : MonoBehaviour
 
     public void OnStartButtonPressed()
     {
+        PlayConfirm();
         if (currentState == GameState.WaitingToStart)
         {
             StartCoroutine(CountdownSequence());
@@ -81,18 +87,22 @@ public class GameManager : MonoBehaviour
 
         // 3
         countdownText.text = "3";
+        PlayCountdownTick();
         yield return new WaitForSeconds(1f);
 
         // 2
         countdownText.text = "2";
+        PlayCountdownTick();
         yield return new WaitForSeconds(1f);
 
         // 1
         countdownText.text = "1";
+        PlayCountdownTick();
         yield return new WaitForSeconds(1f);
 
         // GO!
         countdownText.text = "GO!";
+        PlayCountdownGo();
         yield return new WaitForSeconds(0.5f);
 
         countdownText.gameObject.SetActive(false);
@@ -145,6 +155,31 @@ public class GameManager : MonoBehaviour
 
     void RestartGame()
     {
+        PlayCountdownTick();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void PlayConfirm()
+    {
+        if (confirmEvent.IsNull)
+            return;
+        EventInstance instance = RuntimeManager.CreateInstance(confirmEvent);
+        instance.start();
+        instance.release();
+    }
+    private void PlayCountdownTick()
+    {
+        if (countdownTickEvent.IsNull)
+            return;
+
+        RuntimeManager.PlayOneShot(countdownTickEvent);
+    }
+
+    private void PlayCountdownGo()
+    {
+        if (countdownGoEvent.IsNull)
+            return;
+
+        RuntimeManager.PlayOneShot(countdownGoEvent);
     }
 }
