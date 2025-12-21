@@ -76,6 +76,9 @@ public class PresentSpawner : MonoBehaviour
             //Debug.Log($"Selected material: {randomMaterial.name}");
             present.GetComponent<MeshRenderer>().material = randomMaterial;
             //Debug.Log($"Material applied: {present.GetComponent<MeshRenderer>().material.name}");
+            present.GetComponent<MeshRenderer>().material.mainTextureOffset = new Vector2(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+
+            present.GetComponent<MeshRenderer>().material.mainTextureScale = new Vector2(1,1) * UnityEngine.Random.Range(1f,4f);
         }
 
         /// <summary>

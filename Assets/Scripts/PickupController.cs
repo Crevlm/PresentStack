@@ -57,7 +57,7 @@ public class PickupController : MonoBehaviour
                     heldObject.constraints = RigidbodyConstraints.FreezeRotation; // Freezes rotation to stop spinning
                     heldObject.isKinematic = true;
                     nextPosition = heldObject.gameObject.transform.position; // store the object's initial position
-                    holdDistance = Vector3.Distance(Camera.main.transform.position, hit.point); // remember how far away from the camera we grabbed it, keeping the same distance when we move the mouse
+                    holdDistance = Vector3.Distance(Camera.main.transform.position, hit.collider.gameObject.transform.position); // remember how far away from the camera we grabbed it, keeping the same distance when we move the mouse
 
                     // Check if this object has any weight to it. Otherwise, just use the maxDistFromCursor value
                     // Should mass be considered in this calculation?
@@ -86,7 +86,7 @@ public class PickupController : MonoBehaviour
         //Scroll down (negative) makes the holdDistance bigger which pushes the object away from the camera
         //Scroll up (positive) makes the holdDistance smaller which pulls the object closer to the camera
         holdDistance -= Input.GetKey(KeyCode.LeftShift) ? Input.mouseScrollDelta.y * 0.25f : Input.mouseScrollDelta.y * 2f;
-        holdDistance = Mathf.Clamp(holdDistance, 8f, 26f); // keeps the hold distance between 8 and 26 units and prevents the object from getting too close or too far away
+        holdDistance = Mathf.Clamp(holdDistance, 16f, 26f); // keeps the hold distance between 16 and 26 units and prevents the object from getting too close or too far away
         
 
         Vector3 newPosition = ray.origin + ray.direction * holdDistance; // Calculate where the object should be

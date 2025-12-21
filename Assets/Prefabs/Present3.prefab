@@ -101,7 +101,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4950131698664577313}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 695f5e00177b7e445b710a23d459d5b2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee80ae44fc54b846af74f6ee7f34671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weight
-  weight: 3
+  weight: 30
 --- !u!114 &6807678705840703398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,15 +169,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PresentImpactAudio
   impactEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -921280605
+      Data2: 1240079384
+      Data3: 2093991326
+      Data4: 836657936
+    Path: event:/SFX/PresentImpact
   intensityParameter: ImpactIntensity
   groundLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 65
   minFallTime: 0.1
   maxFallTime: 2.5
   minIntensity: 0
