@@ -9,6 +9,8 @@ public class GameTimer : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public Button startButton;
 
+    public float defaultTime = 12f;
+
     private float timeLeft = 12f;
     private bool gameRunning = false;
     private float highestPoint = 0f;
@@ -39,6 +41,12 @@ public class GameTimer : MonoBehaviour
     public void StartTimer()
     {
         gameRunning = true;
+    }
+
+    public void ResetTimer()
+    {
+        timeLeft = defaultTime;
+        timerText.text = $"Timer:{timeLeft:F1}s";
     }
 
     void Update()

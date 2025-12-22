@@ -23,21 +23,24 @@ public class PresentSpawner : MonoBehaviour
     void Start()
     {
         bounds = GetComponent<Collider>().bounds;
+        presents = new GameObject[numberOfPresents];
         StartCoroutine(SpawnAllPresents());
     }
 
     IEnumerator SpawnAllPresents()
     {
-        presents = new GameObject[numberOfPresents];
-        for (int i = 0; i < numberOfPresents; i++)
+        spawnPoint.GetComponent<Collider>().enabled = true;
+
+        for (int i = 0; i < presents.Length; i++)
         {
-            SpawnPresent(i);
+            presents[i] = SpawnPresent();
             yield return new WaitForFixedUpdate();
         }
+
         spawnPoint.GetComponent<Collider>().enabled = false; // Disable the collider component because it can block raycasts. It may also ignore the physics layer specifically made for ignoring raycasts. Not sure why but some components ignore that so this is a fallback to if having it set to the layer doesn't work.
     }
 
-    void SpawnPresent(int presentNumber)
+    GameObject SpawnPresent()
     {
         //Random position within the spawn area
         Vector3 randomOffset = Utilities.GetRandomPointInBounds(spawnPoint.gameObject.GetComponent<Collider>().bounds);
@@ -51,12 +54,10 @@ public class PresentSpawner : MonoBehaviour
         float randomScaleZ = UnityEngine.Random.Range(minSize.z, maxSize.z);
         Vector3 randomScale = new Vector3(randomScaleX, randomScaleY, randomScaleZ);
 
-        if (presentNumber != 0)
-            StartCoroutine(SpawnCheck(spawnPosition, Utilities.Vec3Average(randomScale))); // NOTE: This is a local coroutine
+        StartCoroutine(SpawnCheck(spawnPosition, Utilities.Vec3Average(randomScale))); // NOTE: This is a local coroutine
 
         //Spawn the present
         GameObject present = Instantiate(presentPrefab, spawnPosition, Quaternion.identity);
-        presents[presentNumber] = present;
 
         present.transform.localScale = randomScale;
 
@@ -65,10 +66,9 @@ public class PresentSpawner : MonoBehaviour
         if (presentWeight != null)
         {
             // Multiply the weight value by the scale of the object (Average between the three axis, X+Y+Z/3)
-            presentWeight.weight *= Utilities.Vec3Average(present.transform.localScale);
+            presentWeight.weight *= Utilities.Vec3Average(present.transform.localScale) + UnityEngine.Random.Range(0f, 0.5f);
         }
 
-        //Select a random Wrapping Paper to put on the present
         //Select a random Wrapping Paper to put on the present
         if (wrappingPapers.Length > 0)
         {
@@ -80,6 +80,8 @@ public class PresentSpawner : MonoBehaviour
 
             present.GetComponent<MeshRenderer>().material.mainTextureScale = new Vector2(1,1) * UnityEngine.Random.Range(1f,4f);
         }
+
+        return present;
 
         /// <summary>
         /// Checks if the current position and scale of the present would spawn inside of an existing one and chooses a new spawn point.
@@ -149,6 +151,15 @@ public class PresentSpawner : MonoBehaviour
         }
     }
 
+    public IEnumerator RestartAllPresents()
+    {
+        for (int i = 0; i < presents.Length; i++)
+        {
+            Destroy(presents[i], 0f);
+            yield return new WaitForFixedUpdate();
+        }
+        StartCoroutine(SpawnAllPresents());
+    }
 
     // Update is called once per frame
     void Update()

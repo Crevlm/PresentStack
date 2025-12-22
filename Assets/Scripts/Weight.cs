@@ -7,11 +7,13 @@ public class Weight : MonoBehaviour
     [Header("How much the object weighs, making them fall down faster.")]
     public float weight = 10f;
     private Rigidbody rb;
+    private CollisionDetectionMode defaultCollisionDetection;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        defaultCollisionDetection = rb.collisionDetectionMode;
     }
 
     // Update is called once per frame
@@ -22,6 +24,8 @@ public class Weight : MonoBehaviour
 
     void FixedUpdate()
     {
+        rb.collisionDetectionMode = rb.linearVelocity.sqrMagnitude > 5 ? CollisionDetectionMode.Continuous : defaultCollisionDetection;
+
         if (rb.IsSleeping() || Mathf.Abs(rb.linearVelocity.y) <= .001f) return;
 
         rb.AddForce(Physics.gravity * weight);

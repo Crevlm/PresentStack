@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject endGamePanel;
     [SerializeField] private TextMeshProUGUI finalScoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
+    [SerializeField] private Button startButton;
     [SerializeField] private Button restartButton;
     [SerializeField] private Button instructionsButton;
     [SerializeField] private Button closeInstructionsButton;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     [Header("Game References")]
     [SerializeField] private PickupController pickupController;
     [SerializeField] private GameTimer gameTimer;
+    [SerializeField] private PresentSpawner presentSpawner;
 
     [Header("FMOD")] //set FMOD event and parameter names in inspector
     [SerializeField] private EventReference confirmEvent;
@@ -53,17 +55,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        currentState = GameState.WaitingToStart;
-
+        StartMenu();
         // Load high score
         highScore = PlayerPrefs.GetInt("HighScore", 0);
-
-        if (endGamePanel != null)
-            endGamePanel.SetActive(false);
-
-        if (countdownText != null)
-            countdownText.gameObject.SetActive(false);
-
+        
         if (restartButton != null)
             restartButton.onClick.AddListener(RestartGame);
 
@@ -72,6 +67,20 @@ public class GameManager : MonoBehaviour
 
         if (closeInstructionsButton != null)
             closeInstructionsButton.onClick.AddListener(OnCloseInstructionsPressed);
+    }
+
+    private void StartMenu()
+    {
+        currentState = GameState.WaitingToStart;
+
+        if (startButton != null && !startButton.gameObject.activeSelf)
+            startButton.gameObject.SetActive(true);
+
+        if (endGamePanel != null)
+            endGamePanel.SetActive(false);
+
+        if (countdownText != null)
+            countdownText.gameObject.SetActive(false);
 
         if (instructionsImage != null)
             instructionsImage.SetActive(false);
@@ -79,9 +88,12 @@ public class GameManager : MonoBehaviour
         if (closeInstructionsButton != null)
             closeInstructionsButton.gameObject.SetActive(false);
 
+        gameTimer.ResetTimer();
+
         // Disable pickup until game starts
         if (pickupController != null)
             pickupController.enabled = false;
+
     }
 
     public void OnStartButtonPressed()
@@ -128,6 +140,7 @@ public class GameManager : MonoBehaviour
     IEnumerator CountdownSequence()
     {
         currentState = GameState.Countdown;
+
 
         if (countdownText != null)
             countdownText.gameObject.SetActive(true);
@@ -203,7 +216,9 @@ public class GameManager : MonoBehaviour
     void RestartGame()
     {
         PlayCountdownTick();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartMenu();
+        presentSpawner.StartCoroutine(presentSpawner.RestartAllPresents());
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void PlayConfirm()
