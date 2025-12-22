@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
 
     private void OnInstructionsPressed()
     {
+        PlayCountdownTick();
         if (instructionsImage != null)
         {
             instructionsImage.SetActive(true);
@@ -112,6 +113,7 @@ public class GameManager : MonoBehaviour
 
     private void OnCloseInstructionsPressed()
     {
+        PlayCountdownTick();
         if (instructionsImage != null)
         {
             instructionsImage.SetActive(false);
