@@ -48,7 +48,7 @@ public class GameTimer : MonoBehaviour
         if (timeLeft <= 0)
         {
             gameRunning = false;
-            timerText.text = "0.0s";
+            timerText.text = "Timer: 00.00s";
 
             int finalScore = Mathf.RoundToInt(highestPoint * 100);
 
@@ -62,7 +62,7 @@ public class GameTimer : MonoBehaviour
         }
 
         timeLeft -= Time.deltaTime;
-        timerText.text = $"{timeLeft:F1}s";
+        timerText.text = $"Timer:{timeLeft:F1}s";
         UpdateHeight();
     }
 

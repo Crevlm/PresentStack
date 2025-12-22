@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI finalScoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
     [SerializeField] private Button restartButton;
+    [SerializeField] private Button instructionsButton;
+    [SerializeField] private Button closeInstructionsButton;
+    [SerializeField] private GameObject instructionsImage;
 
     private int highScore;
 
@@ -64,6 +67,18 @@ public class GameManager : MonoBehaviour
         if (restartButton != null)
             restartButton.onClick.AddListener(RestartGame);
 
+        if (instructionsButton != null)
+            instructionsButton.onClick.AddListener(OnInstructionsPressed);
+
+        if (closeInstructionsButton != null)
+            closeInstructionsButton.onClick.AddListener(OnCloseInstructionsPressed);
+
+        if (instructionsImage != null)
+            instructionsImage.SetActive(false);
+
+        if (closeInstructionsButton != null)
+            closeInstructionsButton.gameObject.SetActive(false);
+
         // Disable pickup until game starts
         if (pickupController != null)
             pickupController.enabled = false;
@@ -76,6 +91,36 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(CountdownSequence());
         }
+    }
+
+    private void OnInstructionsPressed()
+    {
+        if (instructionsImage != null)
+        {
+            instructionsImage.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("Instructions Image is not assigned in inspector");
+        }
+
+        if (closeInstructionsButton != null)
+        {
+            closeInstructionsButton.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnCloseInstructionsPressed()
+    {
+        if (instructionsImage != null)
+        {
+            instructionsImage.SetActive(false);
+        }
+        if (closeInstructionsButton != null)
+        {
+            closeInstructionsButton.gameObject.SetActive(false);
+        }
+
     }
 
     IEnumerator CountdownSequence()
